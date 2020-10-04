@@ -1,11 +1,10 @@
+# Lemuria
 
-
-This is lemuria, an OpenGL visualization plugin for libvisual >= v0.5
-available at https://github.com/Libvisual/
+Lemuria is an OpenGL visualization plugin for libvisual >= v0.5
 
 For libvisual-0.4 please use lemuria-2.1.0
 
-To compile, type
+To compile, install dependencies and type
 
 git clone https://github.com/Libvisual/libvisual.git
 
