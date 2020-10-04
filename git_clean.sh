@@ -30,5 +30,3 @@ for i in $SUBDIRS; do
   git rm -rf $i/$j
   done
 done
-
-echo "You can now rerun autogen.sh"
