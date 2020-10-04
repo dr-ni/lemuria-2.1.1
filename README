@@ -33,6 +33,11 @@ or with other players
 lv-tool --actor lemuria --input pulseaudio
 or
 lv-tool --actor lemuria --input alsa
+or
+lv-tool --actor lemuria --input jack
+
+see also
+lv-tool --help
 
 If the mouse is inside the window, you can use the following
 keyboard shortcuts:
