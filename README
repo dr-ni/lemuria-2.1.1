@@ -1,0 +1,51 @@
+As of version 1.0.0pre5, lemuria can load goom and use it for
+textures. See Goom notes below.
+
+This is lemuria, an OpenGL visualization plugin for xmms and
+visualizer4esd. It is my first OpenGL program ever. To compile this,
+type
+
+./configure
+make
+make install
+
+You need the xmms headers (package xmms-devel on RPM based systems)
+to get this compiled.
+
+If esound is available, you'll also get a standalone program "lemuria",
+which will read audio from any esd player (use -r option for recording
+instead of monitoring).
+
+If the mouse is inside the window, you can use the following
+keyboard shortcuts:
+F:         Next foreground
+T:         Next texture
+W:         Next world (=background)
+CRTL+F:    Random foreground
+CTRL+T:    Random texture
+CTRL+W:    Random world
+H:         Hold effects
+A:         Unhold effects
+Tab:       Toogle fullscreen mode
+Pause:     Toggle pause
+L:         Change Antialiasing mode (none->fastest->best->none...)
+
+XMMS Shortcuts:
+Z:         Previous song
+X:         Play
+C:         Stop
+B:         Next
+
+Lemuria fully exploits your CPU power up to a framerate of about
+30 fps.
+
+Goom Notes:
+
+Lemuria looks in the directory for xmms visualization plugins for
+libgoom.so. If it's available, it will be used for textures.
+You MUST have a version later than goom-1.9.x installed.
+With older goom versions, lemuria will crash.
+(There is no possibility to detect the goom version).
+
+Goom appears on several backgrounds, as sky etc, and it's pretty cool.
+Thanks Jeko for changing goom for use with lemuria.

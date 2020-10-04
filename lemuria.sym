@@ -1,0 +1,13 @@
+lemuria_create
+lemuria_draw_frame
+lemuria_update_audio
+lemuria_destroy
+lemuria_set_size
+lemuria_set_antialiasing
+lemuria_print_help
+lemuria_num_effects
+lemuria_effect_name
+lemuria_effect_label
+lemuria_change_effect
+lemuria_set_effect
+lemuria_next_effect

@@ -1,0 +1,97 @@
+%define name  @PACKAGE@
+%define ver   @VERSION@
+%define prefix /usr
+%define rel 1
+
+# Let us have the plugins reside in the build host's proper location by default
+%define visdir xmms-config --visualization-plugin-dir
+%define plugloc %(%visdir)
+
+Summary: OpenGL plugin for xmms
+Name: %{name}
+Version: %ver
+Release: %rel
+Copyright: GPL
+Group: Applications/Multimedia
+Source: %{name}-%{ver}.tar.gz
+URL: http://gmerlin.sf.net/lemuria
+Vendor: (none)
+Prefix: %{prefix}
+BuildRoot: /var/tmp/%{name}-%{ver}-%{rel}-rpm-buildroot
+Requires: xmms >= 1.2.0 , gtk+ >= 1.2.0
+%description
+Lemuria is an OpenGL visualization plugin with weird shapes, animated
+textures and other fun stuff
+
+%prep
+%setup
+
+%build
+./configure 
+%__make
+
+%install
+%__make DESTDIR=${RPM_BUILD_ROOT} install
+
+%clean
+if [ -O "$RPM_BUILD_ROOT" -a "$RPM_BUILD_ROOT" != "/" -a "$RPM_BUILD_ROOT" != "$HOME" ]; then
+  echo "Deleting build root $RPM_BUILD_ROOT"
+  rm -rf "$RPM_BUILD_ROOT"
+fi
+rm -rf ${RPM_BUILD_DIR}/%{name}-%{ver}
+
+%files
+%defattr(-,root,root)
+%doc README NEWS AUTHORS COPYING ChangeLog INSTALL
+%{plugloc}/liblemuria.la
+%{plugloc}/liblemuria.so
+
+%post
+# Let's make sure we check everywhere!
+export PATH=${PATH}:/usr/local/bin
+VISDIR=%{plugloc}
+
+# Check if install host has xmms-config; if not, cross fingers!
+if which xmms-config > /dev/null 2>&1; then
+  LVISDIR=$(%visdir)
+else
+  exit 0
+fi
+
+# If the build and install hosts have the same configuration, nothing further
+# needs to be done
+[ "$LVISDIR" = "$VISDIR" ] && exit 0
+
+# Otherwise, we do the soft-linking business
+echo "Found xmms-config, using its visualization plugin path $LVISDIR"
+for l in `ls $VISDIR`; do
+  if [ -e "$LVISDIR/$l" ]; then
+    echo "Moving $LVISDIR/$l to $LVISDIR/${l}.rpmorig"
+    mv $LVISDIR/$l $LVISDIR/${l}.rpmorig
+  fi
+  ln -s $VISDIR/$l $LVISDIR/$l
+done
+
+%preun
+# Same rigamarole in reverse; this is not completely solid, as xmms-config may
+# have disappeared in the meantime, leaving us with hanging links
+
+export PATH=${PATH}:/usr/local/bin
+VISDIR=%{plugloc}
+if which xmms-config > /dev/null 2>&1; then
+  LVISDIR=$(%visdir)
+else
+  exit 0
+fi
+
+[ "$LVISDIR" = "$VISDIR" ] && exit 0
+
+for l in `ls $VISDIR`; do
+  if [ -L "$LVISDIR/$l" ]; then
+    rm -f $LVISDIR/$l 
+  fi
+done
+
+%changelog
+* Sat Jul 05 2003 Burkhard Plaum <gmerlin@users.sourceforge.net>
+- Initial spec file
