@@ -1,8 +1,9 @@
 Lemuria v2.1.1 is an OpenGL visualization plugin for libvisual >= v0.5
 
-For libvisual-0.4 please use lemuria-2.1.0
+For libvisual <= v0.4 please use lemuria-2.1.0
 
-To compile, install dependencies and type
+Compile:
+First install all dependencies then type
 
 git clone https://github.com/Libvisual/libvisual.git
 
