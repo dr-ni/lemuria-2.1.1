@@ -56,8 +56,9 @@ Lemuria can load goom and use it for textures.
 Lemuria looks in the directory for xmms visualization plugins for
 libgoom.so. If it's available, it will be used for textures.
 You MUST have a version later than goom-1.9.x installed.
-With older goom versions, lemuria will crash.
-(There is no possibility to detect the goom version).
+eg.
+https://launchpad.net/~kxstudio-team/+archive/ubuntu/ppa/+sourcefiles/goom2k4/0-0ubuntu1~precise1/goom2k4_0.orig.tar.gz
+With older goom versions, lemuria will crash. (There is no possibility to detect the goom version).
 
 Goom appears on several backgrounds, as sky etc, and it's pretty cool.
 Thanks Jeko for changing goom for use with lemuria.
